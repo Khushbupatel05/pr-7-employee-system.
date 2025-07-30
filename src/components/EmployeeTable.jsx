@@ -3,6 +3,8 @@ import Employees from '../pages/Employees'
 import { Link } from 'react-router-dom'
 
 const EmployeeTable = ({ employees , deleteEmployee}) => {
+
+    
     const getDepartment = (id) => {
         switch (id) {
             case 1:
@@ -54,15 +56,15 @@ const EmployeeTable = ({ employees , deleteEmployee}) => {
                                     {employee.name}
                                 </th>
                                 <td className="px-6 py-4">
-                                    ₹ {employee.salary}
+                                    ₹{Number(employee.salary).toLocaleString()}
                                 </td>
                                 <td className="px-6 py-4">
                                     {getDepartment(Number(employee.department))}
                                 </td>
 
                                 <td className="px-6 py-4 flex gap-6">
-                                    <Link to={`/edit-employee/${employee.id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                                    <Link onClick={() => handleDelete(employee.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</Link>
+                                    <Link to={`/edit-employee/${employee.id}`} className="font-medium text-green-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                    <Link onClick={() => handleDelete(employee.id)} className="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</Link>
                                 </td>
                             </tr>
                         })

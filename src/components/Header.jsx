@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     const { pathname } = useLocation();
+    const [menu, setMenu] = useState(false);
     const navigate = useNavigate();
 
     const handlelogout = () => {
@@ -36,14 +38,39 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                                 </li>
                             }
                         </ul>
+                        <div className='flex items-center gap-5'>
 
-                        {
-                            isLoggedIn
-                                ? <button onClick={handlelogout} type="button" className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-medium px-6 py-2 rounded-md transition-all duration-300">Logout</button>
-                                : <button onClick={() => navigate("/login")} type="button" className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-medium px-6 py-2 rounded-md transition-all duration-300">Login</button>
-                        }
+                            <div className="md:hidden">
+                                <button onClick={() => setMenu(!menu)} className="text-black text-2xl">
+                                    {menu ? '✕' : '☰'}
+                                </button>
+                            </div>
+                            {
+                                isLoggedIn
+                                    ? <button onClick={handlelogout} type="button" className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-medium px-6 py-2 rounded-md transition-all duration-300">Logout</button>
+                                    : <button onClick={() => navigate("/login")} type="button" className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-medium px-6 py-2 rounded-md transition-all duration-300">Login</button>
+                            }
+                        </div>
+
                     </nav>
                 </div>
+
+                {menu && (
+                    <div className="md:hidden fixed top-[72px] left-0 right-0 bottom-0 bg-white z-50 p-6 overflow-y-auto">
+                        <ul className="flex flex-col space-y-4 p-2 font-semibold">
+                            <li>
+                                <Link to={"/"} onClick={() => setMenu(false)} className={`${pathname == "/" ? "text-teal-700" : "text-[#221638]"}`}>Home</Link>
+                            </li>
+                            <li>
+                                <Link to={"/services"} onClick={() => setMenu(false)} className={`${pathname == "/services" ? "text-teal-700" : "text-[#221638]"}`}>Services</Link>
+                            </li>
+                            <li>
+                                <Link to={"/contact"} onClick={() => setMenu(false)} className={`${pathname == "/contact" ? "text-teal-700" : "text-[#221638]"}`}>Contact</Link>
+                            </li>
+                            {isLoggedIn && (<Link to={"/employees"} onClick={() => setMenu(false)} className={`${pathname == "/employees" || pathname == "/add-employee" || pathname.includes("/edit-employee") ? "text-[#ff5d22]" : "text-[#221638]"}`}>Employees</Link>)}
+                        </ul>
+                    </div>
+                )}
             </header>
         </>
     )

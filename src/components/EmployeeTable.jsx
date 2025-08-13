@@ -22,8 +22,8 @@ const EmployeeTable = ({ employees , deleteEmployee}) => {
     }
 
     return (
-        <div className="relative overflow-x-auto shadow-lg rounded-2xl ring-1 ring-gray-200 bg-white">
-            <table className="w-full text-sm text-left text-gray-700">
+        <div className="relative overflow-x-auto shadow-lg rounded-2xl ring-1  ring-gray-200 bg-white">
+            <table className="w-full text-sm text-left text-gray-700 ">
                 <thead className="text-sm text-gray-800 uppercase bg-gray-100 border-b border-gray-200">
                     <tr>
                         <th scope="col" className="px-6 py-3">

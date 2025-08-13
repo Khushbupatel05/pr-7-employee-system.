@@ -67,7 +67,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                             <li>
                                 <Link to={"/contact"} onClick={() => setMenu(false)} className={`${pathname == "/contact" ? "text-teal-700" : "text-[#221638]"}`}>Contact</Link>
                             </li>
-                            {isLoggedIn && (<Link to={"/employees"} onClick={() => setMenu(false)} className={`${pathname == "/employees" || pathname == "/add-employee" || pathname.includes("/edit-employee") ? "text-[#ff5d22]" : "text-[#221638]"}`}>Employees</Link>)}
+                            {isLoggedIn && (<Link to={"/employees"} onClick={() => setMenu(false)} className={`${pathname == "/employees" || pathname == "/add-employee" || pathname.includes("/edit-employee") ? "text-teal-700" : "text-[#221638]"}`}>Employees</Link>)}
                         </ul>
                     </div>
                 )}

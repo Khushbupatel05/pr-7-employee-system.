@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const Employees = () => {
     const [employees, setEmployees] = useState([])
-    const [allEmployees, setAllEmployees] = useState([]); // ✅ To store original data
+    const [allEmployees, setAllEmployees] = useState([]); 
     const [search, setSearch] = useState({ name: "", department: "" });
 
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Employees = () => {
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("employees")) || [];
         setEmployees(data);
-        setAllEmployees(data); // ✅ Keep original data for search
+        setAllEmployees(data); 
     }, []);
 
     const deleteEmployee = (id) => {
@@ -41,14 +41,14 @@ const Employees = () => {
 
     return (
         <>
-            <section className="pt-[93px] bg-[#f9fafb] min-h-screen" >
-                <div className='container mx-auto'>
-                    <div className='flex justify-between '>
-                        <h1 className='text-3xl font-semibold text-teal-800 my-5'>Emplyees Data</h1>
-                        <div className='flex items-center  gap-3 flex-wrap'>
+            <section className="pt-[93px] bg-[#f9fafb] min-h-screen">
+                <div className='container mx-auto px-4'>
+                    <div className='flex flex-col md:flex-row md:justify-between gap-4 md:gap-0 py-5'>
+                        <h1 className='text-2xl md:text-3xl font-semibold text-teal-800 my-3 md:my-5 text-center md:text-left'>Emplyees Data</h1>
+                        <div className='flex flex-wrap justify-center md:justify-end items-center gap-3'>
 
                             <select onChange={handleSearch} value={search.department} id="department"
-                                className="bg-white border border-gray-300 text-gray-800 text-sm rounded-md focus:ring-teal-500 focus:border-teal-500 px-4 py-2">
+                                className="bg-white border border-gray-300 text-gray-800 text-sm rounded-md focus:ring-teal-500 focus:border-teal-500 px-4 py-2 w-full sm:w-auto">
                                 <option value="">All Departments</option>
                                 <option value="1">Development</option>
                                 <option value="2">Designing</option>
@@ -57,20 +57,23 @@ const Employees = () => {
                             </select>
 
                             <input type="text" placeholder="Search Name" value={search.name}
-                                id="name" onChange={handleSearch} className="bg-white border border-gray-300 text-gray-800 text-sm rounded-md focus:ring-teal-500 focus:border-teal-500 px-4 py-2 w-full md:w-[200px]" />
+                                id="name" onChange={handleSearch}
+                                className="bg-white border border-gray-300 text-gray-800 text-sm rounded-md focus:ring-teal-500 focus:border-teal-500 px-4 py-2 w-full sm:w-[200px]" />
 
-                            <button onClick={() => navigate('/add-employee')} type="button" className="text-white bg-teal-700 hover:bg-teal-400 ring-slate-200 focus:ring-1 font-medium rounded-sm text-sm px-9 py-2 text-center transition-all duration-300">+ Add Employee</button>
+                            <button onClick={() => navigate('/add-employee')} type="button"
+                                className="text-white  bg-teal-700 hover:bg-teal-400 ring-slate-200 focus:ring-1 font-medium rounded-sm text-sm px-6 md:px-9 py-2 text-center transition-all duration-300 w-full sm:w-auto">
+                                + Add Employee
+                            </button>
                         </div>
-
                     </div>
-                        {
-                            employees.length !== 0
-                                ? <EmployeeTable employees={employees} setEmployees={setEmployees} deleteEmployee={deleteEmployee} />
-                                : <div className='items-center flex justify-center'>
-                                    <img src="/img/noData.webp" alt="no-data" className="w-[700px]" />
-                                </div>
-                        }
-
+                    
+                    {
+                        employees.length !== 0
+                            ? <EmployeeTable employees={employees} setEmployees={setEmployees} deleteEmployee={deleteEmployee}  />
+                            : <div className='items-center flex justify-center mt-5 '>
+                                <img src="/img/noData.webp" alt="no-data" className="w-full max-w-[700px]" />
+                            </div>
+                    }
                 </div>
             </section>
         </>
